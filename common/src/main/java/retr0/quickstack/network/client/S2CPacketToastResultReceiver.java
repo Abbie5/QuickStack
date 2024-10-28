@@ -1,30 +1,23 @@
 package retr0.quickstack.network.client;
 
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import dev.architectury.networking.NetworkManager;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import retr0.quickstack.QuickStackToast;
 import retr0.quickstack.network.S2CPacketToastResult;
-import retr0.quickstack.util.IconPair;
-
-import java.util.ArrayList;
 
 /**
  * Maps items to a "deposited total" along with an immutable icon for the container it was deposited into.
  */
-public class S2CPacketToastResultReceiver implements ClientPlayNetworking.PlayPayloadHandler<S2CPacketToastResult> {
+public class S2CPacketToastResultReceiver implements NetworkManager.NetworkReceiver<S2CPacketToastResult> {
     /**
      * Shows/updates a {@link QuickStackToast} instance with the packet data on the client.
      */
 
     @Override
-    public void receive(S2CPacketToastResult payload, ClientPlayNetworking.Context context)
+    public void receive(S2CPacketToastResult payload, NetworkManager.PacketContext context)
     {
-        MinecraftClient client = context.client();
+        MinecraftClient client = MinecraftClient.getInstance();
         var totalItemsDeposited = payload.totalItemsDeposited();
         var totalContainersUsed = payload.totalContainersUsed();
         var iconMappings = payload.topDeposited();

@@ -36,6 +36,11 @@ dependencies {
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive false }
     shadowBundle project(path: ':common', configuration: 'transformProductionNeoForge')
+
+    modApi "dev.architectury:architectury-neoforge:${rootProject.architectury_version}"
+
+    modImplementation "me.shedaniel.cloth:cloth-config-neoforge:${rootProject.cloth_version}"
+    modImplementation "maven.modrinth:sodium:${rootProject.sodium_version}-neoforge"
 }
 
 processResources {

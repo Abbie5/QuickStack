@@ -17,9 +17,15 @@
 
     "environment": "*",
     "entrypoints": {
-        "main":    [ "retr0.quickstack.QuickStack" ],
-        "client":  [ "retr0.quickstack.QuickStackClient" ],
-        "modmenu": [ "retr0.quickstack.compat.modmenu.ModMenuImpl" ]
+        "main":    [
+            "retr0.quickstack.fabric.QuickStackFabric"
+        ],
+        "client":  [
+            "retr0.quickstack.fabric.client.QuickStackFabricClient"
+        ],
+        "modmenu": [
+            "retr0.quickstack.fabric.compat.modmenu.ModMenuImpl"
+        ]
     },
     "mixins": [
         "quickstack.mixins.json",

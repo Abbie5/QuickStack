@@ -1,12 +1,10 @@
-package retr0.quickstack;
+package retr0.quickstack.client;
 
-import net.fabricmc.api.ClientModInitializer;
 import retr0.quickstack.network.client.PacketRegistry;
 import retr0.quickstack.util.OutlineColorManager;
 
-public class QuickStackClient implements ClientModInitializer {
-    @Override
-    public void onInitializeClient() {
+public class QuickStackClient {
+    public static void init() {
         PacketRegistry.registerS2CPackets();
         OutlineColorManager.init();
     }

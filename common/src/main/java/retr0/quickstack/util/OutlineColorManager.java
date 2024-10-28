@@ -1,11 +1,11 @@
 package retr0.quickstack.util;
 
+import dev.architectury.event.events.client.ClientTickEvent;
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.DoubleBlockProperties;
 import net.minecraft.client.MinecraftClient;
@@ -45,7 +45,7 @@ public final class OutlineColorManager {
     public static void init() {
         if (OutlineColorManager.instance == null) {
             instance = new OutlineColorManager(MinecraftClient.getInstance());
-            ClientTickEvents.START_WORLD_TICK.register(clientWorld -> instance.tick());
+            ClientTickEvent.CLIENT_PRE.register(clientWorld -> instance.tick());
         }
     }
 

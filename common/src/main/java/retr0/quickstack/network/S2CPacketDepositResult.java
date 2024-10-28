@@ -1,16 +1,13 @@
 package retr0.quickstack.network;
 
 import com.mojang.datafixers.util.Either;
-import io.netty.buffer.ByteBuf;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import dev.architectury.networking.NetworkManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Pair;
 import net.minecraft.util.Uuids;
 import net.minecraft.util.math.BlockPos;
 import retr0.quickstack.QuickStack;
@@ -22,8 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import static retr0.quickstack.network.PacketIdentifiers.DEPOSIT_RESULT_ID;
 
 public record S2CPacketDepositResult(
         Map<Integer, List<Either<BlockPos, UUID>>> slotUsageMap
@@ -60,7 +55,7 @@ public record S2CPacketDepositResult(
             });
             explodedMap.put(slotId, list);
         });
-        ServerPlayNetworking.send(player, new S2CPacketDepositResult(explodedMap));
+        NetworkManager.sendToPlayer(player, new S2CPacketDepositResult(explodedMap));
     }
 
     @Override

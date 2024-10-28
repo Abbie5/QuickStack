@@ -1,11 +1,12 @@
 package retr0.quickstack.util;
 
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -29,7 +30,7 @@ import static net.minecraft.world.RaycastContext.ShapeType.COLLIDER;
 public class PathFinder {
     private static final Set<Block> IGNORED_BLOCKS = Set.of(Blocks.CHAIN, Blocks.END_ROD, Blocks.LANTERN, Blocks.LIGHTNING_ROD);
     // TODO: Fences should be checked to see if they're in a valid state!
-    private static final Set<TagKey<Block>> IGNORED_BLOCK_TAGS = Set.of(BlockTags.FENCES, ConventionalBlockTags.CHESTS);
+    private static final Set<TagKey<Block>> IGNORED_BLOCK_TAGS = Set.of(BlockTags.FENCES, TagKey.of(RegistryKeys.BLOCK, Identifier.of("c", "chests")));
 
     private final ChunkCache chunkCache;
     private final BiFunction<Vec3d, Vec3d, Boolean> nearLineOfSightCached;

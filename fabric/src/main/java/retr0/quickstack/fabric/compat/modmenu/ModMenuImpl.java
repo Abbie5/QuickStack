@@ -1,4 +1,4 @@
-package retr0.quickstack.compat.modmenu;
+package retr0.quickstack.fabric.compat.modmenu;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
