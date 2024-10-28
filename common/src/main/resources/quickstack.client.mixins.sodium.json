@@ -3,7 +3,7 @@
     "package": "retr0.quickstack.compat.sodium.mixin",
     "compatibilityLevel": "JAVA_21",
     "injectors": { "defaultRequire": 1 },
-    "mixins": [
+    "client": [
       "MixinSodiumWorldRenderer"
     ]
 }
