@@ -20,7 +20,6 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import retr0.quickstack.QuickStack;
-import retr0.quickstack.compat.itemfavorites.CompatItemFavorites;
 import retr0.quickstack.mixin.AccessorLootableContainerBlockEntity;
 import retr0.quickstack.network.S2CPacketDepositResult;
 import retr0.quickstack.network.S2CPacketToastResult;
@@ -73,7 +72,7 @@ public final class QuickStackManager {
             var associatedInventories = new ArrayList<InventoryInfo>(1);
             int stackSpread = 1, itemsDeposited = 0;
 
-            if (containerQueue == null || CompatItemFavorites.isFavorite(itemStack)) continue;
+            if (containerQueue == null) continue;
 
             while (itemStack.getCount() != 0 && !containerQueue.isEmpty() && stackSpread++ < MAX_STACK_SPREAD) {
                 var inventoryInfo = containerQueue.peek(); // Per-quick stack, only remove if full.

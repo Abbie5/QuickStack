@@ -12,7 +12,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import retr0.quickstack.config.QuickStackConfig;
+import retr0.quickstack.QuickStack;
 import retr0.quickstack.util.InventoryUtil.InventorySource.SourceType;
 
 import java.util.List;
@@ -59,7 +59,7 @@ public final class OutlineColorManager {
 
         if (waitForScreenClose && client.currentScreen == null)
             startRendering();
-        else if (!waitForScreenClose && Util.getMeasuringTimeMs() - lastStartedTimeMs > QuickStackConfig.containerHighlightDuration * 1000f)
+        else if (!waitForScreenClose && Util.getMeasuringTimeMs() - lastStartedTimeMs > QuickStack.CONFIG.containerHighlightDuration * 1000f)
             stopRendering();
     }
 

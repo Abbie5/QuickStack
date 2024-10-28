@@ -20,7 +20,7 @@ public class C2SPacketDepositRequest implements CustomPayload {
             C2SPacketDepositRequest payload, ServerPlayNetworking.Context context)
     {
         QuickStackManager.getInstance().quickStack(
-                context.player(), QuickStackConfig.containerSearchRadius, QuickStackConfig.allowHotbarQuickStack);
+                context.player(), QuickStack.CONFIG.containerSearchRadius, QuickStack.CONFIG.allowHotbarQuickStack);
     }
 
     @Override

@@ -17,8 +17,9 @@
 
     "environment": "*",
     "entrypoints": {
-        "main":   [ "retr0.quickstack.QuickStack" ],
-        "client": [ "retr0.quickstack.QuickStackClient" ]
+        "main":    [ "retr0.quickstack.QuickStack" ],
+        "client":  [ "retr0.quickstack.QuickStackClient" ],
+        "modmenu": [ "retr0.quickstack.compat.modmenu.ModMenuImpl" ]
     },
     "mixins": [
         "quickstack.mixins.json",
@@ -34,9 +35,7 @@
 
     "depends": {
         "fabricloader": "*",
-        "fabric-networking-api-v1": "*",
-        "fabric-lifecycle-events-v1": "*",
-        "fabric-convention-tags-v1": "*",
-        "carrotconfig": "*"
+        "fabric-api": "*",
+        "cloth-config": "*"
     }
 }

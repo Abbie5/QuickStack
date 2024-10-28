@@ -1,5 +1,6 @@
 package retr0.quickstack.mixin.client;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
@@ -80,9 +81,9 @@ public abstract class MixinWorldRenderer {
      */
     @Inject(method = "render", at = @At(value = "CONSTANT", args = "stringValue=blockentities", ordinal = 0))
     private void renderModelOutlines(
-        MatrixStack matrices, float tickDelta, long limitTime, boolean renderBlockOutline, Camera camera,
-        GameRenderer gameRenderer, LightmapTextureManager lightmapTextureManager, Matrix4f positionMatrix,
-        CallbackInfo ci)
+            RenderTickCounter tickCounter, boolean renderBlockOutline, Camera camera,
+            GameRenderer gameRenderer, LightmapTextureManager lightmapTextureManager, Matrix4f matrix4f, Matrix4f matrix4f2,
+            CallbackInfo ci, @Local MatrixStack matrices)
     {
         if (!isRendering) return;
 
