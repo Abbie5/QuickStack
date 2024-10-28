@@ -16,7 +16,9 @@ Adds the ability to quick stack to nearby chests!
 
 [[mixins]]
 config="quickstack.mixins.json"
+[[mixins]]
 config="quickstack.client.mixins.json"
+[[mixins]]
 config="quickstack.client.mixins.sodium.json"
 
 [[dependencies.quickstack]]
