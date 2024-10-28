@@ -1,9 +1,9 @@
 {
     "required": true,
     "package": "retr0.quickstack.compat.sodium.mixin",
-    "compatibilityLevel": "JAVA_17",
+    "compatibilityLevel": "JAVA_21",
     "injectors": { "defaultRequire": 1 },
     "mixins": [
-      "retr0.quickstack.fabric.compat.sodium.mixin.MixinSodiumWorldRenderer"
+      "MixinSodiumWorldRenderer"
     ]
 }

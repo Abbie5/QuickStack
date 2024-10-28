@@ -23,6 +23,9 @@
         "client":  [
             "retr0.quickstack.fabric.client.QuickStackFabricClient"
         ],
+        "server": [
+            "retr0.quickstack.fabric.server.QuickStackFabricServer"
+        ],
         "modmenu": [
             "retr0.quickstack.fabric.compat.modmenu.ModMenuImpl"
         ]

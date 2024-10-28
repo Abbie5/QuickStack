@@ -15,7 +15,6 @@ public class QuickStack {
     public static void init() {
         QuickStack.CONFIG = QuickStackConfig.register();
 
-        PacketRegistry.registerPayloadTypes();
         PacketRegistry.registerC2SPackets();
         QuickStackManager.init();
     }
