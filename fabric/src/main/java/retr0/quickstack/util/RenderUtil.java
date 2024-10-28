@@ -16,7 +16,6 @@ import net.minecraft.util.Identifier;
 import retr0.quickstack.QuickStack;
 
 import static net.minecraft.screen.PlayerScreenHandler.BLOCK_ATLAS_TEXTURE;
-import static retr0.quickstack.QuickStack.MOD_ID;
 
 @Environment(EnvType.CLIENT)
 public final class RenderUtil {
