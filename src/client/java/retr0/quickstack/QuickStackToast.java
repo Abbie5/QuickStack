@@ -13,7 +13,7 @@ import java.util.List;
 import static retr0.quickstack.QuickStack.MOD_ID;
 
 public class QuickStackToast implements Toast {
-    private static final Identifier TEXTURE = new Identifier("toast/recipe");
+    private static final Identifier TEXTURE = Identifier.ofVanilla("toast/recipe");
 
     private static final long DURATION_MS = 5000L;
     private static final Text HEADER = Text.translatable(MOD_ID + ".toast.header");

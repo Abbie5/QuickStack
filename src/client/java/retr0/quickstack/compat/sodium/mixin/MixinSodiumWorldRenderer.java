@@ -1,11 +1,14 @@
 package retr0.quickstack.compat.sodium.mixin;
 
+import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
-import me.jellysquid.mods.sodium.client.render.SodiumWorldRenderer;
+import net.caffeinemc.mods.sodium.client.render.SodiumWorldRenderer;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.*;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.player.BlockBreakingInfo;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
@@ -33,7 +36,7 @@ public abstract class MixinSodiumWorldRenderer {
     private static void cacheOutlineProvider(
             MatrixStack matrices, BufferBuilderStorage bufferBuilders, Long2ObjectMap<SortedSet<BlockBreakingInfo>> blockBreakingProgressions,
             float tickDelta, VertexConsumerProvider.Immediate immediate, double x, double y, double z, BlockEntityRenderDispatcher dispatcher,
-            BlockEntity entity, CallbackInfo ci)
+            BlockEntity entity, ClientPlayerEntity player, LocalBooleanRef isGlowing, CallbackInfo ci)
     {
         outlineProvider = bufferBuilders.getOutlineVertexConsumers();
         isRendering = OutlineColorManager.getInstance().isRendering();

@@ -4,11 +4,21 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.codec.PacketCodecs;
+import net.minecraft.network.packet.CustomPayload;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Pair;
+import retr0.quickstack.QuickStack;
 import retr0.quickstack.util.IconPair;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static retr0.quickstack.network.PacketIdentifiers.TOAST_RESULT_ID;
@@ -16,7 +26,27 @@ import static retr0.quickstack.network.PacketIdentifiers.TOAST_RESULT_ID;
 /**
  * Maps items to a "deposited total" along with an immutable icon for the container it was deposited into.
  */
-public class S2CPacketToastResult {
+public record S2CPacketToastResult(
+        int totalItemsDeposited,
+        int totalContainersUsed,
+        List<IconPair> topDeposited
+) implements CustomPayload {
+    public static Id<S2CPacketToastResult> ID = new Id<>(QuickStack.id("c2s/toast_result"));
+
+    public static PacketCodec<RegistryByteBuf, S2CPacketToastResult> PACKET_CODEC = PacketCodec.tuple(
+            PacketCodecs.INTEGER, S2CPacketToastResult::totalItemsDeposited,
+            PacketCodecs.INTEGER, S2CPacketToastResult::totalContainersUsed,
+            PacketCodecs.collection(
+                    ArrayList::new,
+                    PacketCodec.tuple(
+                            ItemStack.PACKET_CODEC, IconPair::itemIcon,
+                            ItemStack.PACKET_CODEC, IconPair::containerIcon,
+                            IconPair::new
+                    )
+            ), S2CPacketToastResult::topDeposited,
+            S2CPacketToastResult::new
+    );
+
     /**
      * Sends a {@link S2CPacketToastResult} packet to the client.
      */
@@ -30,17 +60,11 @@ public class S2CPacketToastResult {
             .map(entry -> new IconPair(entry.getKey().getDefaultStack(), entry.getValue().getRight()))
             .toList();
 
-        var buf = PacketByteBufs.create();
-        // Note: In the case where an item is deposited into multiple containers, the container icon for the toast
-        //       would be the highest priority container for the item (denoted by the entry in the item->container
-        //       mappings).
-        buf.writeInt(totalItemsDeposited);
-        buf.writeByte(totalContainersUsed);
-        buf.writeByte(topDeposited.size());
-        topDeposited.forEach(iconPair -> {
-            buf.writeItemStack(iconPair.itemIcon());
-            buf.writeItemStack(iconPair.containerIcon());
-        });
-        ServerPlayNetworking.send(player, TOAST_RESULT_ID, buf);
+        ServerPlayNetworking.send(player, new S2CPacketToastResult(totalItemsDeposited, totalContainersUsed, topDeposited));
+    }
+
+    @Override
+    public Id<? extends CustomPayload> getId() {
+        return ID;
     }
 }

@@ -1,6 +1,7 @@
 package retr0.quickstack;
 
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retr0.quickstack.config.QuickStackConfig;
@@ -20,5 +21,9 @@ public class QuickStack implements ModInitializer {
 
         PacketRegistry.registerC2SPackets();
         QuickStackManager.init();
+    }
+
+    public static Identifier id(String path) {
+        return Identifier.of(MOD_ID, path);
     }
 }

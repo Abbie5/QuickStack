@@ -13,14 +13,15 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.Identifier;
+import retr0.quickstack.QuickStack;
 
 import static net.minecraft.screen.PlayerScreenHandler.BLOCK_ATLAS_TEXTURE;
 import static retr0.quickstack.QuickStack.MOD_ID;
 
 @Environment(EnvType.CLIENT)
 public final class RenderUtil {
-    private static final Identifier OUTLINE_INNER_TEXTURE = new Identifier(MOD_ID, "quickstack/slot_outline_inner");
-    private static final Identifier OUTLINE_OUTER_TEXTURE = new Identifier(MOD_ID, "quickstack/slot_outline_outer");
+    private static final Identifier OUTLINE_INNER_TEXTURE = QuickStack.id("quickstack/slot_outline_inner");
+    private static final Identifier OUTLINE_OUTER_TEXTURE = QuickStack.id("quickstack/slot_outline_outer");
 
 
     private RenderUtil() { }

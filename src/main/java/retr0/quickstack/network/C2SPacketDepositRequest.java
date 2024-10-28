@@ -1,27 +1,30 @@
 package retr0.quickstack.network;
 
-import net.fabricmc.fabric.api.networking.v1.PacketSender;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.ServerPlayNetworkHandler;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Identifier;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.packet.CustomPayload;
+import retr0.quickstack.QuickStack;
 import retr0.quickstack.config.QuickStackConfig;
 import retr0.quickstack.util.QuickStackManager;
 
-import static retr0.quickstack.QuickStack.MOD_ID;
-
-public class C2SPacketDepositRequest {
-    public static final Identifier DEPOSIT_REQUEST_ID = new Identifier(MOD_ID, "request_quick_stack");
+public class C2SPacketDepositRequest implements CustomPayload {
+    public static final Id<C2SPacketDepositRequest> ID = new Id<>(QuickStack.id("request_quick_stack"));
+    public static final C2SPacketDepositRequest INSTANCE = new C2SPacketDepositRequest();
+    public static final PacketCodec<RegistryByteBuf, C2SPacketDepositRequest> PACKET_CODEC = PacketCodec.unit(INSTANCE);
 
     /**
      * Executes a quick stack operation for the sender player.
      */
     public static void receive(
-        MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf,
-        PacketSender responseSender)
+            C2SPacketDepositRequest payload, ServerPlayNetworking.Context context)
     {
-        server.execute(() -> QuickStackManager.getInstance().quickStack(
-                player, QuickStackConfig.containerSearchRadius, QuickStackConfig.allowHotbarQuickStack));
+        QuickStackManager.getInstance().quickStack(
+                context.player(), QuickStackConfig.containerSearchRadius, QuickStackConfig.allowHotbarQuickStack);
+    }
+
+    @Override
+    public Id<? extends CustomPayload> getId() {
+        return ID;
     }
 }

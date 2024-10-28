@@ -1,12 +1,12 @@
 package retr0.quickstack.network.client;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-
-import static retr0.quickstack.network.PacketIdentifiers.*;
+import retr0.quickstack.network.S2CPacketDepositResult;
+import retr0.quickstack.network.S2CPacketToastResult;
 
 public class PacketRegistry {
     public static void registerS2CPackets() {
-        ClientPlayNetworking.registerGlobalReceiver(TOAST_RESULT_ID, S2CPacketToastResult::receive);
-        ClientPlayNetworking.registerGlobalReceiver(DEPOSIT_RESULT_ID, S2CPacketDepositResult::receive);
+        ClientPlayNetworking.registerGlobalReceiver(S2CPacketToastResult.ID, new S2CPacketToastResultReceiver());
+        ClientPlayNetworking.registerGlobalReceiver(S2CPacketDepositResult.ID, new S2CPacketDepositResultReceiver());
     }
 }
